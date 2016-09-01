@@ -53,10 +53,11 @@ void rrd_stats_api_v1_chart(RRDSET *st, BUFFER *wb)
 
         buffer_sprintf(wb,
             "%s"
-            "\t\t\t\t\"%s\": { \"name\": \"%s\" }"
+            "\t\t\t\t\"%s\": { \"name\": \"%s\", \"color\": \"%s\" }"
             , c?",\n":""
             , rd->id
             , rd->name
+            , rd->color
             );
 
         c++;
@@ -177,6 +178,7 @@ unsigned long rrd_stats_one_json(RRDSET *st, char *options, BUFFER *wb)
             "\t\t\t\t\t\"algorithm\": \"%s\",\n"
             "\t\t\t\t\t\"multiplier\": %ld,\n"
             "\t\t\t\t\t\"divisor\": %ld,\n"
+            "\t\t\t\t\t\"color\": \"%s\",\n"
             "\t\t\t\t\t\"last_entry_t\": %ld,\n"
             "\t\t\t\t\t\"collected_value\": " COLLECTED_NUMBER_FORMAT ",\n"
             "\t\t\t\t\t\"calculated_value\": " CALCULATED_NUMBER_FORMAT ",\n"
@@ -191,6 +193,7 @@ unsigned long rrd_stats_one_json(RRDSET *st, char *options, BUFFER *wb)
             , rrddim_algorithm_name(rd->algorithm)
             , rd->multiplier
             , rd->divisor
+            , rd->color
             , rd->last_collected_time.tv_sec
             , rd->collected_value
             , rd->calculated_value
@@ -514,6 +517,7 @@ void rrdr_json_wrapper_begin(RRDR *r, BUFFER *wb, uint32_t format, uint32_t opti
         if(i) buffer_strcat(wb, ", ");
         buffer_strcat(wb, sq);
         buffer_strcat(wb, rd->name);
+        buffer_strcat(wb, rd->color);
         buffer_strcat(wb, sq);
         i++;
     }
