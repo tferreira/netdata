@@ -750,11 +750,11 @@ int run_test(struct test *test)
 
     // create the chart
     RRDSET *st = rrdset_create("netdata", name, name, "netdata", NULL, "Unit Testing", "a value", 1, 1, RRDSET_TYPE_LINE);
-    RRDDIM *rd = rrddim_add(st, "dim1", NULL, test->multiplier, test->divisor, test->algorithm);
+    RRDDIM *rd = rrddim_add(st, "dim1", NULL, test->multiplier, test->divisor, test->algorithm, NULL);
     
     RRDDIM *rd2 = NULL;
     if(test->feed2)
-        rd2 = rrddim_add(st, "dim2", NULL, test->multiplier, test->divisor, test->algorithm);
+        rd2 = rrddim_add(st, "dim2", NULL, test->multiplier, test->divisor, test->algorithm, NULL);
 
     st->debug = 1;
 
@@ -885,10 +885,10 @@ int unit_test(long delay, long shift)
     RRDDIM *rdabst = NULL;
     RRDDIM *rdabsi = NULL;
 
-    if(do_abs) rdabs = rrddim_add(st, "absolute", "absolute", 1, 1, RRDDIM_ABSOLUTE);
-    if(do_inc) rdinc = rrddim_add(st, "incremental", "incremental", 1, 1, RRDDIM_INCREMENTAL);
-    if(do_abst) rdabst = rrddim_add(st, "percentage-of-absolute-row", "percentage-of-absolute-row", 1, 1, RRDDIM_PCENT_OVER_ROW_TOTAL);
-    if(do_absi) rdabsi = rrddim_add(st, "percentage-of-incremental-row", "percentage-of-incremental-row", 1, 1, RRDDIM_PCENT_OVER_DIFF_TOTAL);
+    if(do_abs) rdabs = rrddim_add(st, "absolute", "absolute", 1, 1, RRDDIM_ABSOLUTE, NULL);
+    if(do_inc) rdinc = rrddim_add(st, "incremental", "incremental", 1, 1, RRDDIM_INCREMENTAL, NULL);
+    if(do_abst) rdabst = rrddim_add(st, "percentage-of-absolute-row", "percentage-of-absolute-row", 1, 1, RRDDIM_PCENT_OVER_ROW_TOTAL, NULL);
+    if(do_absi) rdabsi = rrddim_add(st, "percentage-of-incremental-row", "percentage-of-incremental-row", 1, 1, RRDDIM_PCENT_OVER_DIFF_TOTAL, NULL);
 
     long increment = 1000;
     collected_number i = 0;

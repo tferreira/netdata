@@ -127,7 +127,7 @@ int do_proc_interrupts(int update_every, unsigned long long dt) {
         for(l = 0; l < lines ;l++) {
             struct interrupt *irr = irrindex(irrs, l, cpus);
             if(!irr->used) continue;
-            rrddim_add(st, irr->id, irr->name, 1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, irr->id, irr->name, 1, 1, RRDDIM_INCREMENTAL, NULL);
         }
     }
     else rrdset_next(st);
@@ -156,7 +156,7 @@ int do_proc_interrupts(int update_every, unsigned long long dt) {
                 for(l = 0; l < lines ;l++) {
                     struct interrupt *irr = irrindex(irrs, l, cpus);
                     if(!irr->used) continue;
-                    rrddim_add(st, irr->id, irr->name, 1, 1, RRDDIM_INCREMENTAL);
+                    rrddim_add(st, irr->id, irr->name, 1, 1, RRDDIM_INCREMENTAL, NULL);
                 }
             }
             else rrdset_next(st);

@@ -585,7 +585,7 @@ RRDSET *rrdset_create(const char *type, const char *id, const char *name, const 
     return(st);
 }
 
-RRDDIM *rrddim_add(RRDSET *st, const char *id, const char *name, long multiplier, long divisor, int algorithm)
+RRDDIM *rrddim_add(RRDSET *st, const char *id, const char *name, long multiplier, long divisor, int algorithm, const char *color)
 {
     char filename[FILENAME_MAX + 1];
     char fullfilename[FILENAME_MAX + 1];
@@ -628,6 +628,11 @@ RRDDIM *rrddim_add(RRDSET *st, const char *id, const char *name, long multiplier
             error("File %s does not have the same algorithm. Clearing it.", fullfilename);
             bzero(rd, size);
         }
+        else if(rd->color != color) {
+            errno = 0;
+            error("File %s does not have the same color. Clearing it.", fullfilename);
+            bzero(rd, size);
+        }
         else if(rd->update_every != st->update_every) {
             errno = 0;
             error("File %s does not have the same refresh frequency. Clearing it.", fullfilename);
@@ -654,6 +659,7 @@ RRDDIM *rrddim_add(RRDSET *st, const char *id, const char *name, long multiplier
         rd->variables = NULL;
         rd->next = NULL;
         rd->name = NULL;
+        rd->color = NULL;
     }
     else {
         // if we didn't manage to get a mmap'd dimension, just create one
@@ -673,6 +679,9 @@ RRDDIM *rrddim_add(RRDSET *st, const char *id, const char *name, long multiplier
 
     snprintfz(varname, CONFIG_MAX_NAME, "dim %s algorithm", rd->id);
     rd->algorithm = rrddim_algorithm_id(config_get(st->id, varname, rrddim_algorithm_name(algorithm)));
+
+    snprintfz(varname, CONFIG_MAX_NAME, "dim %s color", rd->id);
+    rd->color = config_get(st->id, varname, color);
 
     snprintfz(varname, CONFIG_MAX_NAME, "dim %s multiplier", rd->id);
     rd->multiplier = config_get_number(st->id, varname, multiplier);

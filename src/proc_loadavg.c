@@ -49,9 +49,9 @@ int do_proc_loadavg(int update_every, unsigned long long dt) {
         if(!st) {
             st = rrdset_create("system", "load", NULL, "load", NULL, "System Load Average", "load", 100, (update_every < MIN_LOADAVG_UPDATE_EVERY)?MIN_LOADAVG_UPDATE_EVERY:update_every, RRDSET_TYPE_LINE);
 
-            rrddim_add(st, "load1", NULL, 1, 1000, RRDDIM_ABSOLUTE);
-            rrddim_add(st, "load5", NULL, 1, 1000, RRDDIM_ABSOLUTE);
-            rrddim_add(st, "load15", NULL, 1, 1000, RRDDIM_ABSOLUTE);
+            rrddim_add(st, "load1", NULL, 1, 1000, RRDDIM_ABSOLUTE, NULL);
+            rrddim_add(st, "load5", NULL, 1, 1000, RRDDIM_ABSOLUTE, NULL);
+            rrddim_add(st, "load15", NULL, 1, 1000, RRDDIM_ABSOLUTE, NULL);
         }
         else rrdset_next(st);
 
@@ -68,7 +68,7 @@ int do_proc_loadavg(int update_every, unsigned long long dt) {
         if(!st) {
             st = rrdset_create("system", "active_processes", NULL, "processes", NULL, "System Active Processes", "processes", 750, update_every, RRDSET_TYPE_LINE);
 
-            rrddim_add(st, "active", NULL, 1, 1, RRDDIM_ABSOLUTE);
+            rrddim_add(st, "active", NULL, 1, 1, RRDDIM_ABSOLUTE, NULL);
         }
         else rrdset_next(st);
 

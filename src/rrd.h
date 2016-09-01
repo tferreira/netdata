@@ -112,6 +112,7 @@ struct rrddim {
     int algorithm;                                  // the algorithm that is applied to add new collected values
     long multiplier;                                // the multiplier of the collected values
     long divisor;                                   // the divider of the collected values
+    const char *color;                              // the prefered color for the dimension
 
     int mapped;                                     // if set to non zero, this dimension is mapped to a file
 
@@ -396,7 +397,7 @@ extern unsigned long long rrdset_done(RRDSET *st);
 // ----------------------------------------------------------------------------
 // RRD DIMENSION functions
 
-extern RRDDIM *rrddim_add(RRDSET *st, const char *id, const char *name, long multiplier, long divisor, int algorithm);
+extern RRDDIM *rrddim_add(RRDSET *st, const char *id, const char *name, long multiplier, long divisor, int algorithm, const char *color);
 
 extern void rrddim_set_name(RRDSET *st, RRDDIM *rd, const char *name);
 extern void rrddim_free(RRDSET *st, RRDDIM *rd);

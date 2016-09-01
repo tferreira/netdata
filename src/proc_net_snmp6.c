@@ -463,8 +463,8 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
         if(!st) {
             st = rrdset_create("system", "ipv6", NULL, "network", NULL, "IPv6 Bandwidth", "kilobits/s", 500, update_every, RRDSET_TYPE_AREA);
 
-            rrddim_add(st, "received", NULL, 8, 1024, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "sent", NULL, -8, 1024, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "received", NULL, 8, 1024, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "sent", NULL, -8, 1024, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -481,10 +481,10 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
         if(!st) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "packets", NULL, "packets", NULL, "IPv6 Packets", "packets/s", 3000, update_every, RRDSET_TYPE_LINE);
 
-            rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "forwarded", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "delivers", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "forwarded", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "delivers", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -504,9 +504,9 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "fragsout", NULL, "fragments", NULL, "IPv6 Fragments Sent", "packets/s", 3010, update_every, RRDSET_TYPE_LINE);
             st->isdetail = 1;
 
-            rrddim_add(st, "ok", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "failed", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "all", NULL, 1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "ok", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "failed", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "all", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -531,10 +531,10 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "fragsin", NULL, "fragments", NULL, "IPv6 Fragments Reassembly", "packets/s", 3011, update_every, RRDSET_TYPE_LINE);
             st->isdetail = 1;
 
-            rrddim_add(st, "ok", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "failed", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "timeout", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "all", NULL, 1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "ok", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "failed", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "timeout", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "all", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -564,17 +564,17 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "errors", NULL, "errors", NULL, "IPv6 Errors", "packets/s", 3002, update_every, RRDSET_TYPE_LINE);
             st->isdetail = 1;
 
-            rrddim_add(st, "InDiscards", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutDiscards", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "InDiscards", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutDiscards", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
 
-            rrddim_add(st, "InHdrErrors", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InAddrErrors", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InUnknownProtos", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InTooBigErrors", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InTruncatedPkts", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InNoRoutes", NULL, 1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "InHdrErrors", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InAddrErrors", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InUnknownProtos", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InTooBigErrors", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InTruncatedPkts", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InNoRoutes", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
 
-            rrddim_add(st, "OutNoRoutes", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "OutNoRoutes", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -600,8 +600,8 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
         if(!st) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "udppackets", NULL, "udp", NULL, "IPv6 UDP Packets", "packets/s", 3601, update_every, RRDSET_TYPE_LINE);
 
-            rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -627,12 +627,12 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "udperrors", NULL, "udp", NULL, "IPv6 UDP Errors", "events/s", 3701, update_every, RRDSET_TYPE_LINE);
             st->isdetail = 1;
 
-            rrddim_add(st, "RcvbufErrors", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "SndbufErrors", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InErrors", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "NoPorts", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InCsumErrors", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "IgnoredMulti", NULL, 1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "RcvbufErrors", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "SndbufErrors", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InErrors", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "NoPorts", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InCsumErrors", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "IgnoredMulti", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -653,8 +653,8 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
         if(!st) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "udplitepackets", NULL, "udplite", NULL, "IPv6 UDPlite Packets", "packets/s", 3601, update_every, RRDSET_TYPE_LINE);
 
-            rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -680,11 +680,11 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "udpliteerrors", NULL, "udplite", NULL, "IPv6 UDP Lite Errors", "events/s", 3701, update_every, RRDSET_TYPE_LINE);
             st->isdetail = 1;
 
-            rrddim_add(st, "RcvbufErrors", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "SndbufErrors", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InErrors", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "NoPorts", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InCsumErrors", NULL, 1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "RcvbufErrors", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "SndbufErrors", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InErrors", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "NoPorts", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InCsumErrors", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -705,8 +705,8 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "mcast", NULL, "multicast", NULL, "IPv6 Multicast Bandwidth", "kilobits/s", 9000, update_every, RRDSET_TYPE_AREA);
             st->isdetail = 1;
 
-            rrddim_add(st, "received", NULL, 8, 1024, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "sent", NULL, -8, 1024, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "received", NULL, 8, 1024, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "sent", NULL, -8, 1024, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -724,8 +724,8 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "bcast", NULL, "broadcast", NULL, "IPv6 Broadcast Bandwidth", "kilobits/s", 8000, update_every, RRDSET_TYPE_AREA);
             st->isdetail = 1;
 
-            rrddim_add(st, "received", NULL, 8, 1024, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "sent", NULL, -8, 1024, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "received", NULL, 8, 1024, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "sent", NULL, -8, 1024, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -743,8 +743,8 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "mcastpkts", NULL, "multicast", NULL, "IPv6 Multicast Packets", "packets/s", 9500, update_every, RRDSET_TYPE_LINE);
             st->isdetail = 1;
 
-            rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -761,8 +761,8 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
         if(!st) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "icmp", NULL, "icmp", NULL, "IPv6 ICMP Messages", "messages/s", 10000, update_every, RRDSET_TYPE_LINE);
 
-            rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -779,8 +779,8 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
         if(!st) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "icmpredir", NULL, "icmp", NULL, "IPv6 ICMP Redirects", "redirects/s", 10050, update_every, RRDSET_TYPE_LINE);
 
-            rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -810,18 +810,18 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
         if(!st) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "icmperrors", NULL, "icmp", NULL, "IPv6 ICMP Errors", "errors/s", 10100, update_every, RRDSET_TYPE_LINE);
 
-            rrddim_add(st, "InErrors", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutErrors", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "InErrors", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutErrors", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
 
-            rrddim_add(st, "InCsumErrors", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InDestUnreachs", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InPktTooBigs", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InTimeExcds", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InParmProblems", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutDestUnreachs", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutPktTooBigs", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutTimeExcds", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutParmProblems", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "InCsumErrors", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InDestUnreachs", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InPktTooBigs", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InTimeExcds", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InParmProblems", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutDestUnreachs", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutPktTooBigs", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutTimeExcds", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutParmProblems", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -853,10 +853,10 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
         if(!st) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "icmpechos", NULL, "icmp", NULL, "IPv6 ICMP Echo", "messages/s", 10200, update_every, RRDSET_TYPE_LINE);
 
-            rrddim_add(st, "InEchos", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutEchos", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InEchoReplies", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutEchoReplies", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "InEchos", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutEchos", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InEchoReplies", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutEchoReplies", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -883,12 +883,12 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
         if(!st) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "groupmemb", NULL, "icmp", NULL, "IPv6 ICMP Group Membership", "messages/s", 10300, update_every, RRDSET_TYPE_LINE);
 
-            rrddim_add(st, "InQueries", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutQueries", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InResponses", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutResponses", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InReductions", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutReductions", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "InQueries", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutQueries", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InResponses", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutResponses", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InReductions", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutReductions", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -915,10 +915,10 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
         if(!st) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "icmprouter", NULL, "icmp", NULL, "IPv6 Router Messages", "messages/s", 10400, update_every, RRDSET_TYPE_LINE);
 
-            rrddim_add(st, "InSolicits", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutSolicits", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InAdvertisements", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutAdvertisements", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "InSolicits", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutSolicits", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InAdvertisements", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutAdvertisements", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -943,10 +943,10 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
         if(!st) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "icmpneighbor", NULL, "icmp", NULL, "IPv6 Neighbor Messages", "messages/s", 10500, update_every, RRDSET_TYPE_LINE);
 
-            rrddim_add(st, "InSolicits", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutSolicits", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InAdvertisements", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutAdvertisements", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "InSolicits", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutSolicits", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InAdvertisements", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutAdvertisements", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -965,8 +965,8 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
         if(!st) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "icmpmldv2", NULL, "icmp", NULL, "IPv6 ICMP MLDv2 Reports", "reports/s", 10600, update_every, RRDSET_TYPE_LINE);
 
-            rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -995,16 +995,16 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
         if(!st) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "icmptypes", NULL, "icmp", NULL, "IPv6 ICMP Types", "messages/s", 10700, update_every, RRDSET_TYPE_LINE);
 
-            rrddim_add(st, "InType1", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InType128", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InType129", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InType136", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutType1", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutType128", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutType129", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutType133", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutType135", NULL, -1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "OutType143", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "InType1", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InType128", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InType129", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InType136", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutType1", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutType128", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutType129", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutType133", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutType135", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "OutType143", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 
@@ -1035,10 +1035,10 @@ int do_proc_net_snmp6(int update_every, unsigned long long dt) {
         if(!st) {
             st = rrdset_create(RRD_TYPE_NET_SNMP6, "ect", NULL, "packets", NULL, "IPv6 ECT Packets", "packets/s", 10800, update_every, RRDSET_TYPE_LINE);
 
-            rrddim_add(st, "InNoECTPkts", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InECT1Pkts", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InECT0Pkts", NULL, 1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st, "InCEPkts", NULL, 1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st, "InNoECTPkts", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InECT1Pkts", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InECT0Pkts", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st, "InCEPkts", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st);
 

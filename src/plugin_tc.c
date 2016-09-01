@@ -296,7 +296,7 @@ static inline void tc_device_commit(struct tc_device *d) {
                             debug(D_TC_LOOP, "TC: Adding to chart '%s', dimension '%s' (name: '%s')", d->st_bytes->id, c->id, c->name);
 
                             // new class, we have to add it
-                            c->rd_bytes = rrddim_add(d->st_bytes, c->id, c->name?c->name:c->id, 8, 1024, RRDDIM_INCREMENTAL);
+                            c->rd_bytes = rrddim_add(d->st_bytes, c->id, c->name?c->name:c->id, 8, 1024, RRDDIM_INCREMENTAL, NULL);
                         }
                         else debug(D_TC_LOOP, "TC: Updating chart '%s', dimension '%s'", d->st_bytes->id, c->id);
                     }
@@ -350,7 +350,7 @@ static inline void tc_device_commit(struct tc_device *d) {
                             debug(D_TC_LOOP, "TC: Adding to chart '%s', dimension '%s' (name: '%s')", d->st_packets->id, c->id, c->name);
 
                             // new class, we have to add it
-                            c->rd_packets = rrddim_add(d->st_packets, c->id, c->name?c->name:c->id, 1, 1, RRDDIM_INCREMENTAL);
+                            c->rd_packets = rrddim_add(d->st_packets, c->id, c->name?c->name:c->id, 1, 1, RRDDIM_INCREMENTAL, NULL);
                         }
                         else debug(D_TC_LOOP, "TC: Updating chart '%s', dimension '%s'", d->st_packets->id, c->id);
                     }
@@ -404,7 +404,7 @@ static inline void tc_device_commit(struct tc_device *d) {
                             debug(D_TC_LOOP, "TC: Adding to chart '%s', dimension '%s' (name: '%s')", d->st_dropped->id, c->id, c->name);
 
                             // new class, we have to add it
-                            c->rd_dropped = rrddim_add(d->st_dropped, c->id, c->name?c->name:c->id, 1, 1, RRDDIM_INCREMENTAL);
+                            c->rd_dropped = rrddim_add(d->st_dropped, c->id, c->name?c->name:c->id, 1, 1, RRDDIM_INCREMENTAL, NULL);
                         }
                         else debug(D_TC_LOOP, "TC: Updating chart '%s', dimension '%s'", d->st_dropped->id, c->id);
                     }
@@ -805,8 +805,8 @@ void *tc_main(void *ptr) {
                 if(unlikely(!stcpu)) stcpu = rrdset_find("netdata.plugin_tc_cpu");
                 if(unlikely(!stcpu)) {
                     stcpu = rrdset_create("netdata", "plugin_tc_cpu", NULL, "tc.helper", NULL, "NetData TC CPU usage", "milliseconds/s", 135000, rrd_update_every, RRDSET_TYPE_STACKED);
-                    rrddim_add(stcpu, "user",  NULL,  1, 1000, RRDDIM_INCREMENTAL);
-                    rrddim_add(stcpu, "system", NULL, 1, 1000, RRDDIM_INCREMENTAL);
+                    rrddim_add(stcpu, "user",  NULL,  1, 1000, RRDDIM_INCREMENTAL, NULL);
+                    rrddim_add(stcpu, "system", NULL, 1, 1000, RRDDIM_INCREMENTAL, NULL);
                 }
                 else rrdset_next(stcpu);
 
@@ -817,7 +817,7 @@ void *tc_main(void *ptr) {
                 if(unlikely(!sttime)) stcpu = rrdset_find("netdata.plugin_tc_time");
                 if(unlikely(!sttime)) {
                     sttime = rrdset_create("netdata", "plugin_tc_time", NULL, "tc.helper", NULL, "NetData TC script execution", "milliseconds/run", 135001, rrd_update_every, RRDSET_TYPE_AREA);
-                    rrddim_add(sttime, "run_time",  "run time",  1, 1, RRDDIM_ABSOLUTE);
+                    rrddim_add(sttime, "run_time",  "run time",  1, 1, RRDDIM_ABSOLUTE, NULL);
                 }
                 else rrdset_next(sttime);
 

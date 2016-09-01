@@ -1056,8 +1056,8 @@ void update_cgroup_charts(int update_every) {
                 snprintfz(title, CHART_TITLE_MAX, "CPU Usage for cgroup %s", cg->chart_title);
                 st = rrdset_create(type, "cpu", NULL, "cpu", "cgroup.cpu", title, "%", 40000, update_every, RRDSET_TYPE_STACKED);
 
-                rrddim_add(st, "user", NULL, 100, hz, RRDDIM_INCREMENTAL);
-                rrddim_add(st, "system", NULL, 100, hz, RRDDIM_INCREMENTAL);
+                rrddim_add(st, "user", NULL, 100, hz, RRDDIM_INCREMENTAL, NULL);
+                rrddim_add(st, "system", NULL, 100, hz, RRDDIM_INCREMENTAL, NULL);
             }
             else rrdset_next(st);
 
@@ -1077,7 +1077,7 @@ void update_cgroup_charts(int update_every) {
 
                 for(i = 0; i < cg->cpuacct_usage.cpus ;i++) {
                     snprintfz(id, CHART_TITLE_MAX, "cpu%u", i);
-                    rrddim_add(st, id, NULL, 100, 1000000000, RRDDIM_INCREMENTAL);
+                    rrddim_add(st, id, NULL, 100, 1000000000, RRDDIM_INCREMENTAL, NULL);
                 }
             }
             else rrdset_next(st);
@@ -1097,12 +1097,12 @@ void update_cgroup_charts(int update_every) {
                     st = rrdset_create(type, "mem", NULL, "mem", "cgroup.mem", title, "MB", 40200, update_every,
                                        RRDSET_TYPE_STACKED);
 
-                    rrddim_add(st, "cache", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE);
-                    rrddim_add(st, "rss", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE);
+                    rrddim_add(st, "cache", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE, NULL);
+                    rrddim_add(st, "rss", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE, NULL);
                     if(cg->memory.has_dirty_swap)
-                        rrddim_add(st, "swap", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE);
-                    rrddim_add(st, "rss_huge", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE);
-                    rrddim_add(st, "mapped_file", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE);
+                        rrddim_add(st, "swap", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE, NULL);
+                    rrddim_add(st, "rss_huge", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE, NULL);
+                    rrddim_add(st, "mapped_file", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE, NULL);
                 }
                 else rrdset_next(st);
 
@@ -1122,8 +1122,8 @@ void update_cgroup_charts(int update_every) {
                                    update_every, RRDSET_TYPE_AREA);
 
                 if(cg->memory.has_dirty_swap)
-                    rrddim_add(st, "dirty", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE);
-                rrddim_add(st, "writeback", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE);
+                    rrddim_add(st, "dirty", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE, NULL);
+                rrddim_add(st, "writeback", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE, NULL);
             }
             else rrdset_next(st);
 
@@ -1139,8 +1139,8 @@ void update_cgroup_charts(int update_every) {
                     st = rrdset_create(type, "mem_activity", NULL, "mem", "cgroup.mem_activity", title, "MB/s",
                                        40400, update_every, RRDSET_TYPE_LINE);
 
-                    rrddim_add(st, "pgpgin", "in", sysconf(_SC_PAGESIZE), 1024 * 1024, RRDDIM_INCREMENTAL);
-                    rrddim_add(st, "pgpgout", "out", -sysconf(_SC_PAGESIZE), 1024 * 1024, RRDDIM_INCREMENTAL);
+                    rrddim_add(st, "pgpgin", "in", sysconf(_SC_PAGESIZE), 1024 * 1024, RRDDIM_INCREMENTAL, NULL);
+                    rrddim_add(st, "pgpgout", "out", -sysconf(_SC_PAGESIZE), 1024 * 1024, RRDDIM_INCREMENTAL, NULL);
                 }
                 else rrdset_next(st);
 
@@ -1156,8 +1156,8 @@ void update_cgroup_charts(int update_every) {
                     st = rrdset_create(type, "pgfaults", NULL, "mem", "cgroup.pgfaults", title, "MB/s", 40500,
                                        update_every, RRDSET_TYPE_LINE);
 
-                    rrddim_add(st, "pgfault", NULL, sysconf(_SC_PAGESIZE), 1024 * 1024, RRDDIM_INCREMENTAL);
-                    rrddim_add(st, "pgmajfault", "swap", -sysconf(_SC_PAGESIZE), 1024 * 1024, RRDDIM_INCREMENTAL);
+                    rrddim_add(st, "pgfault", NULL, sysconf(_SC_PAGESIZE), 1024 * 1024, RRDDIM_INCREMENTAL, NULL);
+                    rrddim_add(st, "pgmajfault", "swap", -sysconf(_SC_PAGESIZE), 1024 * 1024, RRDDIM_INCREMENTAL, NULL);
                 }
                 else rrdset_next(st);
 
@@ -1174,8 +1174,8 @@ void update_cgroup_charts(int update_every) {
                 st = rrdset_create(type, "io", NULL, "disk", "cgroup.io", title, "KB/s", 41200,
                                    update_every, RRDSET_TYPE_LINE);
 
-                rrddim_add(st, "read", NULL, 1, 1024, RRDDIM_INCREMENTAL);
-                rrddim_add(st, "write", NULL, -1, 1024, RRDDIM_INCREMENTAL);
+                rrddim_add(st, "read", NULL, 1, 1024, RRDDIM_INCREMENTAL, NULL);
+                rrddim_add(st, "write", NULL, -1, 1024, RRDDIM_INCREMENTAL, NULL);
             }
             else rrdset_next(st);
 
@@ -1191,8 +1191,8 @@ void update_cgroup_charts(int update_every) {
                 st = rrdset_create(type, "serviced_ops", NULL, "disk", "cgroup.serviced_ops", title, "operations/s", 41200,
                                    update_every, RRDSET_TYPE_LINE);
 
-                rrddim_add(st, "read", NULL, 1, 1, RRDDIM_INCREMENTAL);
-                rrddim_add(st, "write", NULL, -1, 1, RRDDIM_INCREMENTAL);
+                rrddim_add(st, "read", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+                rrddim_add(st, "write", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
             }
             else rrdset_next(st);
 
@@ -1208,8 +1208,8 @@ void update_cgroup_charts(int update_every) {
                 st = rrdset_create(type, "io", NULL, "disk", "cgroup.io", title, "KB/s", 41200,
                                    update_every, RRDSET_TYPE_LINE);
 
-                rrddim_add(st, "read", NULL, 1, 1024, RRDDIM_INCREMENTAL);
-                rrddim_add(st, "write", NULL, -1, 1024, RRDDIM_INCREMENTAL);
+                rrddim_add(st, "read", NULL, 1, 1024, RRDDIM_INCREMENTAL, NULL);
+                rrddim_add(st, "write", NULL, -1, 1024, RRDDIM_INCREMENTAL, NULL);
             }
             else rrdset_next(st);
 
@@ -1226,8 +1226,8 @@ void update_cgroup_charts(int update_every) {
                 st = rrdset_create(type, "throttle_serviced_ops", NULL, "disk", "cgroup.throttle_serviced_ops", title, "operations/s", 41200,
                                    update_every, RRDSET_TYPE_LINE);
 
-                rrddim_add(st, "read", NULL, 1, 1, RRDDIM_INCREMENTAL);
-                rrddim_add(st, "write", NULL, -1, 1, RRDDIM_INCREMENTAL);
+                rrddim_add(st, "read", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+                rrddim_add(st, "write", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
             }
             else rrdset_next(st);
 
@@ -1243,8 +1243,8 @@ void update_cgroup_charts(int update_every) {
                 st = rrdset_create(type, "queued_ops", NULL, "disk", "cgroup.queued_ops", title, "operations", 42000,
                                    update_every, RRDSET_TYPE_LINE);
 
-                rrddim_add(st, "read", NULL, 1, 1, RRDDIM_ABSOLUTE);
-                rrddim_add(st, "write", NULL, -1, 1, RRDDIM_ABSOLUTE);
+                rrddim_add(st, "read", NULL, 1, 1, RRDDIM_ABSOLUTE, NULL);
+                rrddim_add(st, "write", NULL, -1, 1, RRDDIM_ABSOLUTE, NULL);
             }
             else rrdset_next(st);
 
@@ -1260,8 +1260,8 @@ void update_cgroup_charts(int update_every) {
                 st = rrdset_create(type, "merged_ops", NULL, "disk", "cgroup.merged_ops", title, "operations/s", 42100,
                                    update_every, RRDSET_TYPE_LINE);
 
-                rrddim_add(st, "read", NULL, 1, 1024, RRDDIM_INCREMENTAL);
-                rrddim_add(st, "write", NULL, -1, 1024, RRDDIM_INCREMENTAL);
+                rrddim_add(st, "read", NULL, 1, 1024, RRDDIM_INCREMENTAL, NULL);
+                rrddim_add(st, "write", NULL, -1, 1024, RRDDIM_INCREMENTAL, NULL);
             }
             else rrdset_next(st);
 
@@ -1361,8 +1361,8 @@ void *cgroups_main(void *ptr)
             if(!stcpu_thread) {
                 stcpu_thread = rrdset_create("netdata", "plugin_cgroups_cpu", NULL, "proc.internal", NULL, "NetData CGroups Plugin CPU usage", "milliseconds/s", 132000, rrd_update_every, RRDSET_TYPE_STACKED);
 
-                rrddim_add(stcpu_thread, "user",  NULL,  1, 1000, RRDDIM_INCREMENTAL);
-                rrddim_add(stcpu_thread, "system", NULL, 1, 1000, RRDDIM_INCREMENTAL);
+                rrddim_add(stcpu_thread, "user",  NULL,  1, 1000, RRDDIM_INCREMENTAL, NULL);
+                rrddim_add(stcpu_thread, "system", NULL, 1, 1000, RRDDIM_INCREMENTAL, NULL);
             }
             else rrdset_next(stcpu_thread);
 

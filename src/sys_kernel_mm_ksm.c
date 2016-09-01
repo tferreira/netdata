@@ -95,11 +95,11 @@ int do_sys_kernel_mm_ksm(int update_every, unsigned long long dt) {
     if(!st) {
         st = rrdset_create("mem", "ksm", NULL, "ksm", NULL, "Kernel Same Page Merging", "MB", 5000, update_every, RRDSET_TYPE_AREA);
 
-        rrddim_add(st, "shared", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE);
-        rrddim_add(st, "unshared", NULL, -1, 1024 * 1024, RRDDIM_ABSOLUTE);
-        rrddim_add(st, "sharing", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE);
-        rrddim_add(st, "volatile", NULL, -1, 1024 * 1024, RRDDIM_ABSOLUTE);
-        rrddim_add(st, "to_scan", "to scan", -1, 1024 * 1024, RRDDIM_ABSOLUTE);
+        rrddim_add(st, "shared", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE, NULL);
+        rrddim_add(st, "unshared", NULL, -1, 1024 * 1024, RRDDIM_ABSOLUTE, NULL);
+        rrddim_add(st, "sharing", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE, NULL);
+        rrddim_add(st, "volatile", NULL, -1, 1024 * 1024, RRDDIM_ABSOLUTE, NULL);
+        rrddim_add(st, "to_scan", "to scan", -1, 1024 * 1024, RRDDIM_ABSOLUTE, NULL);
     }
     else rrdset_next(st);
 
@@ -114,8 +114,8 @@ int do_sys_kernel_mm_ksm(int update_every, unsigned long long dt) {
     if(!st) {
         st = rrdset_create("mem", "ksm_savings", NULL, "ksm", NULL, "Kernel Same Page Merging Savings", "MB", 5001, update_every, RRDSET_TYPE_AREA);
 
-        rrddim_add(st, "savings", NULL, -1, 1024 * 1024, RRDDIM_ABSOLUTE);
-        rrddim_add(st, "offered", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE);
+        rrddim_add(st, "savings", NULL, -1, 1024 * 1024, RRDDIM_ABSOLUTE, NULL);
+        rrddim_add(st, "offered", NULL, 1, 1024 * 1024, RRDDIM_ABSOLUTE, NULL);
     }
     else rrdset_next(st);
 
@@ -127,7 +127,7 @@ int do_sys_kernel_mm_ksm(int update_every, unsigned long long dt) {
     if(!st) {
         st = rrdset_create("mem", "ksm_ratios", NULL, "ksm", NULL, "Kernel Same Page Merging Effectiveness", "percentage", 5002, update_every, RRDSET_TYPE_LINE);
 
-        rrddim_add(st, "savings", NULL, 1, 10000, RRDDIM_ABSOLUTE);
+        rrddim_add(st, "savings", NULL, 1, 10000, RRDDIM_ABSOLUTE, NULL);
     }
     else rrdset_next(st);
 

@@ -420,8 +420,8 @@ int do_proc_vmstat(int update_every, unsigned long long dt) {
         if(!st_swapio) {
             st_swapio = rrdset_create("system", "swapio", NULL, "swap", NULL, "Swap I/O", "kilobytes/s", 250, update_every, RRDSET_TYPE_AREA);
 
-            rrddim_add(st_swapio, "in",  NULL, sysconf(_SC_PAGESIZE), 1024, RRDDIM_INCREMENTAL);
-            rrddim_add(st_swapio, "out", NULL, -sysconf(_SC_PAGESIZE), 1024, RRDDIM_INCREMENTAL);
+            rrddim_add(st_swapio, "in",  NULL, sysconf(_SC_PAGESIZE), 1024, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st_swapio, "out", NULL, -sysconf(_SC_PAGESIZE), 1024, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st_swapio);
 
@@ -437,8 +437,8 @@ int do_proc_vmstat(int update_every, unsigned long long dt) {
         if(!st_io) {
             st_io = rrdset_create("system", "io", NULL, "disk", NULL, "Disk I/O", "kilobytes/s", 150, update_every, RRDSET_TYPE_AREA);
 
-            rrddim_add(st_io, "in",  NULL,  1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st_io, "out", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st_io, "in",  NULL,  1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st_io, "out", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st_io);
 
@@ -455,8 +455,8 @@ int do_proc_vmstat(int update_every, unsigned long long dt) {
             st_pgfaults = rrdset_create("mem", "pgfaults", NULL, "system", NULL, "Memory Page Faults", "page faults/s", 500, update_every, RRDSET_TYPE_LINE);
             st_pgfaults->isdetail = 1;
 
-            rrddim_add(st_pgfaults, "minor",  NULL,  1, 1, RRDDIM_INCREMENTAL);
-            rrddim_add(st_pgfaults, "major", NULL, -1, 1, RRDDIM_INCREMENTAL);
+            rrddim_add(st_pgfaults, "minor",  NULL,  1, 1, RRDDIM_INCREMENTAL, NULL);
+            rrddim_add(st_pgfaults, "major", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
         }
         else rrdset_next(st_pgfaults);
 

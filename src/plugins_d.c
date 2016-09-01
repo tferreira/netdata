@@ -315,7 +315,7 @@ void *pluginsd_worker_thread(void *arg)
 
                 RRDDIM *rd = rrddim_find(st, id);
                 if(unlikely(!rd)) {
-                    rd = rrddim_add(st, id, name, multiplier, divisor, rrddim_algorithm_id(algorithm));
+                    rd = rrddim_add(st, id, name, multiplier, divisor, rrddim_algorithm_id(algorithm), NULL);
                     rd->flags = 0x00000000;
                     if(options && *options) {
                         if(strstr(options, "hidden") != NULL) rd->flags |= RRDDIM_FLAG_HIDDEN;

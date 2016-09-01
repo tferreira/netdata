@@ -68,8 +68,8 @@ int do_proc_net_netstat(int update_every, unsigned long long dt) {
                 if(!st) {
                     st = rrdset_create("system", "ipv4", NULL, "network", NULL, "IPv4 Bandwidth", "kilobits/s", 500, update_every, RRDSET_TYPE_AREA);
 
-                    rrddim_add(st, "received", NULL, 8, 1024, RRDDIM_INCREMENTAL);
-                    rrddim_add(st, "sent", NULL, -8, 1024, RRDDIM_INCREMENTAL);
+                    rrddim_add(st, "received", NULL, 8, 1024, RRDDIM_INCREMENTAL, NULL);
+                    rrddim_add(st, "sent", NULL, -8, 1024, RRDDIM_INCREMENTAL, NULL);
                 }
                 else rrdset_next(st);
 
@@ -87,8 +87,8 @@ int do_proc_net_netstat(int update_every, unsigned long long dt) {
                     st = rrdset_create("ipv4", "inerrors", NULL, "errors", NULL, "IPv4 Input Errors", "packets/s", 4000, update_every, RRDSET_TYPE_LINE);
                     st->isdetail = 1;
 
-                    rrddim_add(st, "noroutes", NULL, 1, 1, RRDDIM_INCREMENTAL);
-                    rrddim_add(st, "truncated", NULL, 1, 1, RRDDIM_INCREMENTAL);
+                    rrddim_add(st, "noroutes", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+                    rrddim_add(st, "truncated", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
                 }
                 else rrdset_next(st);
 
@@ -106,8 +106,8 @@ int do_proc_net_netstat(int update_every, unsigned long long dt) {
                     st = rrdset_create("ipv4", "mcast", NULL, "multicast", NULL, "IPv4 Multicast Bandwidth", "kilobits/s", 9000, update_every, RRDSET_TYPE_AREA);
                     st->isdetail = 1;
 
-                    rrddim_add(st, "received", NULL, 8, 1024, RRDDIM_INCREMENTAL);
-                    rrddim_add(st, "sent", NULL, -8, 1024, RRDDIM_INCREMENTAL);
+                    rrddim_add(st, "received", NULL, 8, 1024, RRDDIM_INCREMENTAL, NULL);
+                    rrddim_add(st, "sent", NULL, -8, 1024, RRDDIM_INCREMENTAL, NULL);
                 }
                 else rrdset_next(st);
 
@@ -125,8 +125,8 @@ int do_proc_net_netstat(int update_every, unsigned long long dt) {
                     st = rrdset_create("ipv4", "bcast", NULL, "broadcast", NULL, "IPv4 Broadcast Bandwidth", "kilobits/s", 8000, update_every, RRDSET_TYPE_AREA);
                     st->isdetail = 1;
 
-                    rrddim_add(st, "received", NULL, 8, 1024, RRDDIM_INCREMENTAL);
-                    rrddim_add(st, "sent", NULL, -8, 1024, RRDDIM_INCREMENTAL);
+                    rrddim_add(st, "received", NULL, 8, 1024, RRDDIM_INCREMENTAL, NULL);
+                    rrddim_add(st, "sent", NULL, -8, 1024, RRDDIM_INCREMENTAL, NULL);
                 }
                 else rrdset_next(st);
 
@@ -144,8 +144,8 @@ int do_proc_net_netstat(int update_every, unsigned long long dt) {
                     st = rrdset_create("ipv4", "mcastpkts", NULL, "multicast", NULL, "IPv4 Multicast Packets", "packets/s", 9500, update_every, RRDSET_TYPE_LINE);
                     st->isdetail = 1;
 
-                    rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL);
-                    rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL);
+                    rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+                    rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
                 }
                 else rrdset_next(st);
 
@@ -163,8 +163,8 @@ int do_proc_net_netstat(int update_every, unsigned long long dt) {
                     st = rrdset_create("ipv4", "bcastpkts", NULL, "broadcast", NULL, "IPv4 Broadcast Packets", "packets/s", 8500, update_every, RRDSET_TYPE_LINE);
                     st->isdetail = 1;
 
-                    rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL);
-                    rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL);
+                    rrddim_add(st, "received", NULL, 1, 1, RRDDIM_INCREMENTAL, NULL);
+                    rrddim_add(st, "sent", NULL, -1, 1, RRDDIM_INCREMENTAL, NULL);
                 }
                 else rrdset_next(st);
 
