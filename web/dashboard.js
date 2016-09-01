@@ -2072,7 +2072,7 @@
         };
 
         // this should be called just ONCE per dimension per chart
-        this._chartDimensionColor = function(label) {
+        this._chartDimensionColor = function(label, preferedColor) {
             if(this.colors === null) this.chartColors();
 
             if(typeof this.colors_assigned[label] === 'undefined') {
@@ -2081,7 +2081,12 @@
                         this.colors_available.push(NETDATA.themes.current.colors[i]);
                 }
 
-                this.colors_assigned[label] = this.colors_available.shift();
+                if(typeof preferedColor !== 'undefined' && (this.colors_available.indexOf(preferedColor) >= 0)) {
+                    this.colors_assigned[label] = preferedColor;
+                }
+                else {
+                    this.colors_assigned[label] = this.colors_available.shift();
+                }
 
                 if(this.debug === true)
                     this.log('label "' + label + '" got color "' + this.colors_assigned[label]);
@@ -2176,7 +2181,17 @@
                 // let's assign colors to all dimensions
                 if(this.library.track_colors() === true)
                     for(var dim in this.chart.dimensions)
-                        this._chartDimensionColor(this.chart.dimensions[dim].name);
+                        // check if a specific color is required
+                        console.log(this.chart.dimensions[dim]);
+                        // if(this.chart.dimension[dim].color === 'undefined') {
+                            this._chartDimensionColor(this.chart.dimensions[dim].name)
+                        // }
+                        // if(typeof this.chart.dimension[dim].color !== 'undefined') {
+                        //     this._chartDimensionColor(this.chart.dimensions[dim].name, this.chart.dimension[dim].color);
+                        // }
+                        // else {
+                        //     this._chartDimensionColor(this.chart.dimensions[dim].name)
+                        // }
             }
             // we will re-generate the colors for the chart
             // based on the selected dimensions
